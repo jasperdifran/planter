@@ -1,3 +1,4 @@
 planter
 *.o
 .vscode
+.DS*

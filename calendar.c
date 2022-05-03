@@ -36,9 +36,9 @@ void write_cal_head(FILE *out) {
 }
 
 void write_cal(struct calendar *calendar) {
-  srand((unsigned)time(NULL));
-  char cal_name[50];
-  snprintf(cal_name, 25, "calendar%d.ics", rand() % DAY);
+  //srand((unsigned)time(NULL));
+  char cal_name[50] = "cal.ics";
+  //snprintf(cal_name, 25, "calendar%d.ics", rand() % DAY);
   time_t t = get_start();
   int len = collect_events(calendar->events, t);
   if (len == 0) {
@@ -46,7 +46,8 @@ void write_cal(struct calendar *calendar) {
     exit(1);
   }
   calendar->size = len;
-  FILE *f = fopen(cal_name, "w");
+  remove(cal_name);
+  FILE *f = fopen(cal_name, "w");//fopen(cal_name, "w");
   printf("Writing %d events to %s...\n", calendar->size, cal_name);
   write_cal_head(f);
   for (int i = 0; i < len; i++) {
